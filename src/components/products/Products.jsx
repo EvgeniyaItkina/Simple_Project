@@ -70,6 +70,14 @@ const Products = () => {
           </Link>
           <div>{product.title}</div>
           <div>{product.price}</div>
+          {/* add buttons in hover mode */}
+          {state.hoverProduct && state.hoverProduct.id === product.id && (
+            <div>
+              <button>Edit</button>
+              <button>Delete</button>
+            </div>
+          )}
+
         </div>
       ))
       }
