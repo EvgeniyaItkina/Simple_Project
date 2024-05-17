@@ -1,12 +1,39 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useReducer } from "react"
 import axios from 'axios';
 import './Products.css';
 import { Link } from "react-router-dom";
+
+const ACTION_TYPES = {
+  HOVER: 'HOVER'
+}
 
 const Products = () => {
   const [products, setProducts] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
+
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case ACTION_TYPES.HOVER:
+        return {
+          ...state,
+          hoverProduct: action.sendObject_payload,
+
+        }
+        break;
+
+      default:
+        return state;
+    }
+
+  }
+
+  const initialState = {
+    hoverProduct: null
+  }
+  const [state, dispatch] = useReducer(reducer, initialState)
+
+
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -33,8 +60,9 @@ const Products = () => {
     <div className="product-list">
       {products.map(product => (
         <div key={product.id}
-          className="product-item"
-          onMouseEnter={() => { }}
+          /* className={state.hoveredProduct && state.hoveredProduct.id === product.id ? 'hoverProduct' : ""} */
+          className={state.hoverProduct && state.hoverProduct.id === product.id ? "product-item-hoverd" : "product-item"}
+          onMouseEnter={() => dispatch({ type: ACTION_TYPES.HOVER, sendObject_payload: product })}
         >
           <Link to={`/product/${product.id}`}>
             {/* <img src={product.images[0]}></img> */}
@@ -43,8 +71,9 @@ const Products = () => {
           <div>{product.title}</div>
           <div>{product.price}</div>
         </div>
-      ))}
-    </div>
+      ))
+      }
+    </div >
   );
 }
 

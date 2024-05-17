@@ -5,6 +5,18 @@
   padding: 20px;
   justify-content: center;
 }
+.product-item-hoverd {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+  background-color: lightslategray;
+}
+.product-item-hoverd img {
+  width: 200px;
+}
+
 .product-item {
   border: 1px solid #ccc;
   border-radius: 5px;
