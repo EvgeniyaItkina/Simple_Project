@@ -1,5 +1,7 @@
 import './App.css';
 import ProductDetails from './components/products/ProductDetails';
+import ProductEdit from './components/products/ProductEdit';
+import ProductNew from './components/products/ProductNew';
 import Products from './components/products/Products';
 import { BrowserRouter, Route, Routes, } from 'react-router-dom'
 function App() {
@@ -17,7 +19,9 @@ function App() {
           </ul>
         </nav> */}
         <Routes>
-          <Route path='/product/:product_id' element={<ProductDetails />} />
+          <Route path='/product/new' element={<ProductNew />} />
+          <Route path='/product/details/:product_id' element={<ProductDetails />} />
+          <Route path='/product/edit/:product_id' element={<ProductEdit />} />
           <Route path='/' element={<Products />} />
 
         </Routes>

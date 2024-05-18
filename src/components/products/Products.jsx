@@ -57,32 +57,36 @@ const Products = () => {
   if (!products) return <div>No products found</div>
 
   return (
-    <div className="product-list">
-      {products.map(product => (
-        <div key={product.id}
-          /* className={state.hoveredProduct && state.hoveredProduct.id === product.id ? 'hoverProduct' : ""} */
-          className={state.hoverProduct && state.hoverProduct.id === product.id ? "product-item-hoverd" : "product-item"}
-          onMouseEnter={() => dispatch({ type: ACTION_TYPES.HOVER, sendObject_payload: product })}
-        >
-          <Link to={`/product/${product.id}`}>
-            {/* <img src={product.images[0]}></img> */}
-            <img src={product.images[0].replace('/"', '').replace('[', '').replace('"', '').replace(']', '')}></img>
-          </Link>
-          <div>{product.title}</div>
-          <div>{product.price}</div>
-          {/* add buttons in hover mode */}
-          {state.hoverProduct && state.hoverProduct.id === product.id && (
-            <div>
-              <button>Edit</button>
-              <button>Delete</button>
-            </div>
-          )}
+    <div>
+      <button>
+        <Link to='/product/new/'>New Product</Link>
+      </button>
+      <div className="product-list">
+        {products.map(product => (
+          <div key={product.id}
+            /* className={state.hoveredProduct && state.hoveredProduct.id === product.id ? 'hoverProduct' : ""} */
+            className={state.hoverProduct && state.hoverProduct.id === product.id ? "product-item-hoverd" : "product-item"}
+            onMouseEnter={() => dispatch({ type: ACTION_TYPES.HOVER, sendObject_payload: product })}
+          >
+            <Link to={`/product/details/${product.id}`}>
+              {/* <img src={product.images[0]}></img> */}
+              <img src={product.images[0].replace('/"', '').replace('[', '').replace('"', '').replace(']', '')}></img>
+            </Link>
+            <div>{product.title}</div>
+            <div>{product.price}</div>
+            {/* add buttons in hover mode */}
+            {state.hoverProduct && state.hoverProduct.id === product.id && (
+              <div>
+                <button>Edit</button>
+                <button>Delete</button>
+              </div>
+            )}
 
-        </div>
-      ))
-      }
-    </div >
-  );
+          </div>
+        ))
+        }
+      </div >
+    </div>);
 }
 
 export default Products
